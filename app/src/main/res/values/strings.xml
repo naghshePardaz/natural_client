@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">FRW</string>
+    <string name="title_activity_profile">ProfileActivity</string>
+</resources>
