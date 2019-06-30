@@ -14,6 +14,6 @@ import retrofit2.http.POST;
 public interface RequestsApi {
     @Headers("Content-Type: application/json")
     @POST("api/auth")
-    Call<ResponseBody> auth(@Body JsonObject body);
+    Observable<ResponseBody> auth(@Body JsonObject body);
 
 }
