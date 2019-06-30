@@ -86,35 +86,35 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private void loginPostRequest(JsonObject jsonParam) {
-        Call<ResponseBody> call = RetrofitClient.createApi().auth(jsonParam);
+        RetrofitClient.createApi().auth(jsonParam).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ResponseBody>() {
 
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.isSuccessful()) {
-                    try {
-                        token = response.body().string();
-                        SaveSharedPreferences.createSharedPref(getApplicationContext(),"token",token);
-                        loginPageHandler();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
                     }
 
-                } else {
-                    try {
-                        System.out.println(response.errorBody().string());
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    @Override
+                    public void onNext(ResponseBody responseBody) {
+                        try {
+                            token = responseBody.string();
+                            SaveSharedPreferences.createSharedPref(getApplicationContext(), "token", token);
+                            loginPageHandler();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
-                }
-            }
 
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.e("FAI", "MSG: " + t.getMessage());
-            }
-        });
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     private void loginPageHandler() {
@@ -126,4 +126,3 @@ public class MainActivity extends AppCompatActivity {
         startActivity(profileIntent);
     }
 }
-

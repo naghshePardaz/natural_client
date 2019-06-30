@@ -7,18 +7,20 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
+    private static Retrofit retrofit = null;
 
     public static RequestsApi createApi() {
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://natural.liara.run/")
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-
+        if (retrofit==null) {
+            retrofit = new Retrofit.Builder()
+                    .baseUrl("https://natural.liara.run/")
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .build();
+        }
         return retrofit.create(RequestsApi.class);
     }
-
 }
