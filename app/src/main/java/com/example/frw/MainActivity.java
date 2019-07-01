@@ -12,15 +12,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
+import java.util.List;
 
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 
 public class MainActivity extends AppCompatActivity {
     private EditText editTextUsername;
@@ -31,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private String usernameInput;
     private String passwordInput;
     private String token;
+    private ResponseBody projectList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,20 +92,25 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private void loginPostRequest(JsonObject jsonParam) {
-        RetrofitClient.createApi().auth(jsonParam).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+        RetrofitClient.createApi().auth(jsonParam)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ResponseBody>() {
-
                     @Override
                     public void onSubscribe(Disposable d) {
-
                     }
 
                     @Override
                     public void onNext(ResponseBody responseBody) {
                         try {
                             token = responseBody.string();
-                            SaveSharedPreferences.createSharedPref(getApplicationContext(), "token", token);
+                            SaveSharedPreferences.createSharedPref(
+                                    getApplicationContext(), "token", token);
+
                             loginPageHandler();
+
+                            getProjectList(token);
+
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -107,12 +118,10 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable e) {
-
                     }
 
                     @Override
                     public void onComplete() {
-
                     }
                 });
     }
@@ -124,5 +133,46 @@ public class MainActivity extends AppCompatActivity {
                         Intent.FLAG_ACTIVITY_NEW_TASK |
                         Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(profileIntent);
+    }
+
+    private void getProjectList(String token) {
+        RetrofitClient.createApi().proj(token)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<JSONObject>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        Log.e("1111111111111","111111111111111111111111111111111111111111111111111111111111");
+                    }
+
+                    @Override
+                    public void onNext(JSONObject response) {
+                        Log.e("+++++++++++++++++++++++", "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                        try {
+                            decodeProjectList(response);
+                            Log.e("decodeeeeeeeeeeeeeeeeee", "------------------------------------------------  "
+                                    + response.get("username"));
+                        } catch (JSONException e) {
+                            Log.e("TRYYYYYYYYYYYYYYY", e.getMessage());
+                            e.printStackTrace();
+                        }
+                    }
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e("222222222222222222","22222222222222222222222222222222222222222222222");
+                        Log.e("ERRR",e.getMessage());
+                    }
+
+
+                    @Override
+                    public void onComplete() {
+                        Log.e("3333333333333333","3333333333333333333333333333333333333333333333");
+                    }
+                });
+    }
+
+    private void decodeProjectList(JSONObject response) throws JSONException {
+        Log.e("ERRRRRRRbggggggggRRRRRR", "------------------------------------------------  "
+                + response);
     }
 }
