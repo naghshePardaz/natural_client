@@ -12,14 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.IOException;
-import java.util.List;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -36,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
     private String usernameInput;
     private String passwordInput;
     private String token;
-    private ResponseBody projectList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,10 +122,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void loginPageHandler() {
         Intent profileIntent = new Intent(getApplicationContext(), ProfileActivity.class);
-        profileIntent.addFlags(
-                Intent.FLAG_ACTIVITY_CLEAR_TOP |
-                        Intent.FLAG_ACTIVITY_NEW_TASK |
-                        Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        profileIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                Intent.FLAG_ACTIVITY_NEW_TASK |
+                Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(profileIntent);
     }
 
@@ -139,40 +132,28 @@ public class MainActivity extends AppCompatActivity {
         RetrofitClient.createApi().proj(token)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<JSONObject>() {
+                .subscribe(new Observer<ProjectResponse>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        Log.e("1111111111111","111111111111111111111111111111111111111111111111111111111111");
                     }
 
                     @Override
-                    public void onNext(JSONObject response) {
-                        Log.e("+++++++++++++++++++++++", "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-                        try {
-                            decodeProjectList(response);
-                            Log.e("decodeeeeeeeeeeeeeeeeee", "------------------------------------------------  "
-                                    + response.get("username"));
-                        } catch (JSONException e) {
-                            Log.e("TRYYYYYYYYYYYYYYY", e.getMessage());
-                            e.printStackTrace();
-                        }
+                    public void onNext(ProjectResponse projectResponse) {
+                        decodeProjectList(projectResponse);
                     }
+
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("222222222222222222","22222222222222222222222222222222222222222222222");
-                        Log.e("ERRR",e.getMessage());
                     }
-
 
                     @Override
                     public void onComplete() {
-                        Log.e("3333333333333333","3333333333333333333333333333333333333333333333");
                     }
                 });
     }
 
-    private void decodeProjectList(JSONObject response) throws JSONException {
-        Log.e("ERRRRRRRbggggggggRRRRRR", "------------------------------------------------  "
-                + response);
+    private void decodeProjectList(ProjectResponse pr) {
+        Log.e("ERR", "SHOWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW:" +
+                pr.getProjecList().get(1).getProjectName());
     }
 }

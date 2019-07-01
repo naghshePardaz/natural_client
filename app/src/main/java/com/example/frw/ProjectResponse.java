@@ -2,7 +2,7 @@ package com.example.frw;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.Map;
+import java.util.List;
 
 public class ProjectResponse {
     @SerializedName("_id")
@@ -12,7 +12,7 @@ public class ProjectResponse {
     private String userName;
 
     @SerializedName("projects")
-    private Map<String, ProjectsList> projecList;
+    private List<ProjectsList> projecList;
 
     public String getUserID() {
         return userID;
@@ -28,10 +28,10 @@ public class ProjectResponse {
         this.userName = userName;
     }
 
-    public Map<String, ProjectsList> getProjecList() {
+    public List<ProjectsList> getProjecList() {
         return projecList;
     }
-    public void setProjecList(Map<String, ProjectsList> projecList) {
+    public void setProjecList(List<ProjectsList> projecList) {
         this.projecList = projecList;
     }
 }
