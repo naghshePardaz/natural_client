@@ -1,15 +1,14 @@
-package com.example.frw;
+package com.example.frw.request;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-
 import static android.content.Context.MODE_PRIVATE;
 
-public class SaveSharedPreferences {
+public class SharedPref {
     private static final String MY_PREF_NAME = "Authenticated";
 
-    private static SharedPreferences getPreferences(Context context) {
+    public static SharedPreferences getPreferences(Context context) {
         return context.getSharedPreferences(MY_PREF_NAME, MODE_PRIVATE);
     }
 
@@ -18,7 +17,6 @@ public class SaveSharedPreferences {
         // Setting value in Preferences
         SharedPreferences.Editor editor = getPreferences(context).edit();
         editor.putString(name, value).apply();
-
     }
 
     public static boolean isValueExists(Context context, String name) {

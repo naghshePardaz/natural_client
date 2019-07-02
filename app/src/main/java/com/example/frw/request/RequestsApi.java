@@ -1,4 +1,4 @@
-package com.example.frw;
+package com.example.frw.request;
 
 import com.google.gson.JsonObject;
 

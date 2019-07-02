@@ -6,12 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.example.frw.request.RetrofitClient;
+import com.example.frw.request.SharedPref;
 import com.google.gson.JsonObject;
 
 import java.io.IOException;
@@ -46,9 +47,9 @@ public class MainActivity extends AppCompatActivity {
         editTextPassword.addTextChangedListener(loginTextWatcher);
         buttonConfirm.setOnClickListener(loginOnClickListener);
 
-        boolean isJwtExists = SaveSharedPreferences.isValueExists(getApplicationContext(), "token");
+        boolean isJwtExists = SharedPref.isValueExists(getApplicationContext(), "token");
         if (isJwtExists) {
-            loginPageHandler();
+            goProfileActivity();
         } else {
             linearLayout.setVisibility(View.VISIBLE);
         }
@@ -98,12 +99,10 @@ public class MainActivity extends AppCompatActivity {
                     public void onNext(ResponseBody responseBody) {
                         try {
                             token = responseBody.string();
-                            SaveSharedPreferences.createSharedPref(
+                            SharedPref.createSharedPref(
                                     getApplicationContext(), "token", token);
 
-                            loginPageHandler();
-
-                            getProjectList(token);
+                            goProfileActivity();
 
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -120,40 +119,12 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    private void loginPageHandler() {
-        Intent profileIntent = new Intent(getApplicationContext(), ProfileActivity.class);
-        profileIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+    private void goProfileActivity() {
+        Intent mIntent = new Intent(this, ProfileActivity.class);
+        mIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
                 Intent.FLAG_ACTIVITY_NEW_TASK |
                 Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(profileIntent);
-    }
-
-    private void getProjectList(String token) {
-        RetrofitClient.createApi().proj(token)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ProjectResponse>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                    }
-
-                    @Override
-                    public void onNext(ProjectResponse projectResponse) {
-                        decodeProjectList(projectResponse);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                    }
-
-                    @Override
-                    public void onComplete() {
-                    }
-                });
-    }
-
-    private void decodeProjectList(ProjectResponse pr) {
-        Log.e("ERR", "SHOWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW:" +
-                pr.getProjecList().get(1).getProjectName());
+        startActivity(mIntent);
     }
 }
+
