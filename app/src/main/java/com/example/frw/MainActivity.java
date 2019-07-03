@@ -119,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
+
     private void goProfileActivity() {
         Intent mIntent = new Intent(this, ProfileActivity.class);
         mIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |

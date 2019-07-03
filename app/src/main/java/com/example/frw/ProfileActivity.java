@@ -1,6 +1,7 @@
 package com.example.frw;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -41,6 +42,7 @@ public class ProfileActivity extends AppCompatActivity {
         // Retrieve Projects data from response
 
         // Create adapter and passing project data
+        Log.e("INSIDE", "ERRRRRRRRRRRRRR" + sLists);
         ProjectAdaptor adapter = new ProjectAdaptor(sLists);
 
         // Attach adaptor to recycler view to populate data
@@ -77,6 +79,7 @@ public class ProfileActivity extends AppCompatActivity {
     private void decodeProjectList(ProjectResponse pr) {
         List<ProjectsList> pLists = pr.getProjecList();
         sLists = new ArrayList<>();
+        Log.e("INSIDE", "ERRRRRRRRRRRRRR" + sLists);
 
         for (ProjectsList pList : pLists) {
             sLists.add(pList.getProjectName());

@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/tvProjectName"
-        android:layout_width="100dp"
+        android:layout_width="10dp"
         android:layout_height="wrap_content" />
 
 </LinearLayout>
