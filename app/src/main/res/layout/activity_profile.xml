@@ -6,11 +6,12 @@
     android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_projects"
+        android:id="@+id/rvProjects"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:scrollbars="vertical"
-        android:padding="20dp">
+        android:padding="15dp"
+        android:background="@android:color/darker_gray">
     </androidx.recyclerview.widget.RecyclerView>
 
 </RelativeLayout>

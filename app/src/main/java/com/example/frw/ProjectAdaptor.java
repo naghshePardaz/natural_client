@@ -13,19 +13,21 @@ import java.util.List;
 public class ProjectAdaptor extends RecyclerView.Adapter<ProjectAdaptor.ViewHolder> {
 
     private List<String> mData;
-    private LayoutInflater mInflater;
-    private ItemClickListener mClickListener;
 
     // data is passed into the constructor
-    public ProjectAdaptor(List<String> mData, Context context) {
-        this.mData = mData;
-        this.mInflater = LayoutInflater.from(context);
+    public ProjectAdaptor(List<String> data) {
+        this.mData = data;
     }
 
     // inflates the row layout from xml when needed
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.content_profile, parent, false);
+        Context context = parent.getContext();
+        LayoutInflater inflater = LayoutInflater.from(context);
+
+        // Inflate the custom layout
+        View view = inflater.inflate(R.layout.content_profile, parent, false);
+
         return new ViewHolder(view);
     }
 
@@ -39,32 +41,16 @@ public class ProjectAdaptor extends RecyclerView.Adapter<ProjectAdaptor.ViewHold
     // total number of rows
     @Override
     public int getItemCount() {
-        return mData.size();
+        return mData == null ? 0 :mData.size();
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         TextView mTextView;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            mTextView = itemView.findViewById(R.id.text_view_project);
-            itemView.setOnClickListener(this);
+            mTextView = itemView.findViewById(R.id.tvProjectName);
         }
-
-        @Override
-        public void onClick(View view) {
-            if(mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
-        }
-    }
-
-    // allows clicks events to be caught
-    void setClickListener(ItemClickListener itemClickListener) {
-        this.mClickListener = itemClickListener;
-    }
-
-    // parent activity will implement this method to respond to click events
-    public interface ItemClickListener {
-        void onItemClick(View view, int position);
     }
 }
