@@ -1,24 +1,17 @@
 package com.example.frw;
 
 import android.os.Bundle;
-<<<<<<< HEAD
-import android.util.Log;
-=======
+
 import android.view.View;
 import android.widget.Toast;
->>>>>>> d358e88ee8a29c1eab92aff85f8e06db0ecfa142
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.frw.request.ProjectResponse;
-import com.example.frw.request.ProjectsList;
 import com.example.frw.request.RetrofitClient;
 import com.example.frw.request.SharedPref;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -38,19 +31,11 @@ public class ProfileActivity extends AppCompatActivity implements ProjectAdaptor
         // Lookup recycler view in activity layout
         rvProjects = findViewById(R.id.rvProjects);
 
+        // Read token from SharedPref and execute new Request/Response
         String mToken = SharedPref.getPreferences(getApplicationContext())
                 .getString("token", null);
         getProjectList(mToken, this);
 
-<<<<<<< HEAD
-        // Create adapter and passing project data
-        Log.e("INSIDE", "ERRRRRRRRRRRRRR" + sLists);
-        ProjectAdaptor adapter = new ProjectAdaptor(sLists);
-
-        // Attach adaptor to recycler view to populate data
-        rvProjects.setAdapter(adapter);
-=======
->>>>>>> d358e88ee8a29c1eab92aff85f8e06db0ecfa142
         // set layout manager to position item
         rvProjects.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
     }
@@ -81,14 +66,6 @@ public class ProfileActivity extends AppCompatActivity implements ProjectAdaptor
                     }
                 });
     }
-
-<<<<<<< HEAD
-    private void decodeProjectList(ProjectResponse pr) {
-        List<ProjectsList> pLists = pr.getProjecList();
-        sLists = new ArrayList<>();
-        Log.e("INSIDE", "ERRRRRRRRRRRRRR" + sLists);
-=======
->>>>>>> d358e88ee8a29c1eab92aff85f8e06db0ecfa142
 
     @Override
     public void onItemClick(View view, int position) {

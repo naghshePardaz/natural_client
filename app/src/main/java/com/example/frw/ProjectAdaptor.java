@@ -65,11 +65,7 @@ public class ProjectAdaptor extends RecyclerView.Adapter<ProjectAdaptor.ViewHold
     // total number of rows
     @Override
     public int getItemCount() {
-<<<<<<< HEAD
-        return mData.size();
-=======
         return pName.size();
->>>>>>> d358e88ee8a29c1eab92aff85f8e06db0ecfa142
     }
 
 
