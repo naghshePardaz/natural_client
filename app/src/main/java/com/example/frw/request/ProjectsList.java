@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ProjectsList {
     @SerializedName("sendData")
-    private SendData data;
+    private List<SendData> data;
 
     @SerializedName("_id")
     private String projectID;
@@ -14,11 +14,11 @@ public class ProjectsList {
     @SerializedName("name")
     private String projectName;
 
-    public SendData getData() {
+    public List<SendData> getData() {
         return data;
     }
 
-    public void setData(SendData data) {
+    public void setData(List<SendData> data) {
         this.data = data;
     }
 

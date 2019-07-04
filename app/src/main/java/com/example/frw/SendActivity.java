@@ -110,7 +110,8 @@ public class SendActivity extends AppCompatActivity {
 
                         @Override
                         public void onNext(ProjectResponse projectResponse) {
-                            Toast.makeText(getApplicationContext(), "successFully upload To server", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "successFully upload To server", Toast.LENGTH_LONG).show();
+                            SendActivity.super.onBackPressed();
                         }
 
                         @Override

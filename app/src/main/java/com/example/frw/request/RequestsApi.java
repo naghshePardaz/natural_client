@@ -19,7 +19,7 @@ public interface RequestsApi {
     Observable<ResponseBody> auth(@Body JsonObject body);
 
     @POST("api/contractor/listProjects")
-    Observable<ProjectResponse> proj(@Header("x-auth-token") String tok);
+    Observable<ProjectResponse> getProjects(@Header("x-auth-token") String token);
 
     @Multipart
     @POST("api/file/upload/{projectId}")

@@ -2,6 +2,7 @@ package com.example.frw;
 
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -34,15 +35,16 @@ public class ProfileActivity extends AppCompatActivity implements ProjectAdaptor
         // Read token from SharedPref and execute new Request/Response
         String mToken = SharedPref.getPreferences(getApplicationContext())
                 .getString("token", null);
-        getProjectList(mToken, this);
 
+        getProjectList(mToken, this);
         // set layout manager to position item
-        rvProjects.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        rvProjects.setAdapter(new SimpleAdapter());
+        rvProjects.setLayoutManager(new LinearLayoutManager(this));
     }
 
 
-    private void getProjectList(String token, final ProjectAdaptor.ItemClickListener t) {
-        RetrofitClient.createApi().proj(token)
+    private void getProjectList(String token, final ProfileActivity profileActivity) {
+        RetrofitClient.createApi().getProjects(token)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ProjectResponse>() {
@@ -53,22 +55,30 @@ public class ProfileActivity extends AppCompatActivity implements ProjectAdaptor
                     @Override
                     public void onNext(ProjectResponse pr) {
                         adapter = new ProjectAdaptor(pr);
-                        adapter.setClickListener(t);
+                        adapter.setClickListener(profileActivity);
                         rvProjects.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+                        Log.e("", "onNext: "+pr.getProjectList() );
                     }
 
                     @Override
                     public void onError(Throwable e) {
+                        Toast.makeText(profileActivity, e.getMessage(), Toast.LENGTH_LONG).show();
+                        System.out.println(e.getMessage());
+
+
                     }
 
                     @Override
                     public void onComplete() {
+                        Log.e("", "onkkkkkkkkkkkkkkkkkNext: " );
+
                     }
                 });
     }
 
     @Override
     public void onItemClick(View view, int position) {
-        Toast.makeText(getApplicationContext(), adapter.getProjectData(position).getDataID() , Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), adapter.getProjectData(position).get(1).getDataID() , Toast.LENGTH_LONG).show();
     }
 }

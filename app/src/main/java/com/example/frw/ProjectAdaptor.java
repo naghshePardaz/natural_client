@@ -2,6 +2,7 @@ package com.example.frw;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,13 +26,14 @@ public class ProjectAdaptor extends RecyclerView.Adapter<ProjectAdaptor.ViewHold
     private List<String> pName;
     private List<String> pId;
     private ItemClickListener mClickListener;
-    private Map<Integer, SendData> pData;
+    private Map<Integer, List<SendData>> pData;
 
     // data is passed into the constructor
     ProjectAdaptor(ProjectResponse data) {
+        Log.e("Taf", "ProjectAdaptor: "+data );
         List<String> projectName = new ArrayList<>();
         List<String> projectId = new ArrayList<>();
-        Map<Integer, SendData> projectData = new HashMap<>();
+        Map<Integer, List<SendData>> projectData = new HashMap<>();
 
         for (ProjectsList pList : data.getProjectList()) {
             projectName.add(pList.getProjectName());
@@ -99,7 +101,7 @@ public class ProjectAdaptor extends RecyclerView.Adapter<ProjectAdaptor.ViewHold
     }
 
 
-    SendData getProjectData(int id) {
+    List<SendData> getProjectData(int id) {
         return pData.get(id);
     }
 
