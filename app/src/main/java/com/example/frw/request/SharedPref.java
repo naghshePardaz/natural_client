@@ -21,9 +21,6 @@ public class SharedPref {
 
     public static boolean isValueExists(Context context, String name) {
         String data = getPreferences(context).getString(name, null);
-        if (data != null) {
-            return true;
-        }
-        return false;
+        return data != null;
     }
 }

@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     private EditText editTextUsername;
     private EditText editTextPassword;
     private Button buttonConfirm;
-    private LinearLayout linearLayout;
 
     private String usernameInput;
     private String passwordInput;
@@ -41,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         editTextUsername = findViewById(R.id.edit_text_username);
         editTextPassword = findViewById(R.id.edit_text_password);
         buttonConfirm = findViewById(R.id.button_confirm);
-        linearLayout = findViewById(R.id.linear_login_form);
+        LinearLayout linearLayout = findViewById(R.id.linear_login_form);
 
         editTextUsername.addTextChangedListener(loginTextWatcher);
         editTextPassword.addTextChangedListener(loginTextWatcher);

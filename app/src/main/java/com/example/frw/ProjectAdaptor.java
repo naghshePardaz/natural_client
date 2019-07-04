@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.frw.request.ProjectResponse;
@@ -27,7 +28,7 @@ public class ProjectAdaptor extends RecyclerView.Adapter<ProjectAdaptor.ViewHold
     private Map<Integer, SendData> pData;
 
     // data is passed into the constructor
-    public ProjectAdaptor(ProjectResponse data) {
+    ProjectAdaptor(ProjectResponse data) {
         List<String> projectName = new ArrayList<>();
         List<String> projectId = new ArrayList<>();
         Map<Integer, SendData> projectData = new HashMap<>();
@@ -44,8 +45,9 @@ public class ProjectAdaptor extends RecyclerView.Adapter<ProjectAdaptor.ViewHold
     }
 
     // inflates the row layout from xml when needed
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
@@ -57,7 +59,7 @@ public class ProjectAdaptor extends RecyclerView.Adapter<ProjectAdaptor.ViewHold
 
     // binds the data to the TextView in each row
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         final String str = pName.get(position);
         final String id = pId.get(position);
         holder.mTextView.setText(str);
@@ -81,7 +83,7 @@ public class ProjectAdaptor extends RecyclerView.Adapter<ProjectAdaptor.ViewHold
         TextView mTextView;
         Button mButton;
 
-        public ViewHolder(View itemView) {
+        private ViewHolder(View itemView) {
             super(itemView);
             mTextView = itemView.findViewById(R.id.tvProjectName);
             mButton = itemView.findViewById(R.id.btnSendImage);
@@ -90,12 +92,14 @@ public class ProjectAdaptor extends RecyclerView.Adapter<ProjectAdaptor.ViewHold
 
         @Override
         public void onClick(View view) {
-            if (mClickListener != null)
+            if (mClickListener != null) {
                 mClickListener.onItemClick(view, getAdapterPosition());
+            }
         }
     }
 
-    public SendData getProjectData(int id) {
+
+    SendData getProjectData(int id) {
         return pData.get(id);
     }
 

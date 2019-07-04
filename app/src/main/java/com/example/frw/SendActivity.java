@@ -37,11 +37,8 @@ public class SendActivity extends AppCompatActivity {
 
     private static final int STORAGE_PERMISSION_CODE = 123;
     private int PICK_IMAGE_REQUEST = 1;
-    private Button buttonChoose;
-    private Button buttonUpload;
     private ImageView imageView;
     private String projectId;
-    private Bitmap bitmap;
     private Uri filePath;
 
     @Override
@@ -54,8 +51,8 @@ public class SendActivity extends AppCompatActivity {
 
         requestStoragePermission();
 
-        buttonChoose = findViewById(R.id.buttonChoose);
-        buttonUpload = findViewById(R.id.buttonUpload);
+        Button buttonChoose = findViewById(R.id.buttonChoose);
+        Button buttonUpload = findViewById(R.id.buttonUpload);
         imageView = findViewById(R.id.imageView);
 
         buttonChoose.setOnClickListener(chooseImageClickListener);
@@ -82,7 +79,7 @@ public class SendActivity extends AppCompatActivity {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             filePath = data.getData();
             try {
-                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                 imageView.setImageBitmap(bitmap);
 
             } catch (IOException e) {
@@ -131,6 +128,7 @@ public class SendActivity extends AppCompatActivity {
 
     private String getPath(Uri filePath) {
         Cursor cursor = getContentResolver().query(filePath, null, null, null, null);
+        assert cursor != null;
         cursor.moveToFirst();
         String document_id = cursor.getString(0);
         document_id = document_id.substring(document_id.lastIndexOf(":") + 1);
@@ -139,6 +137,7 @@ public class SendActivity extends AppCompatActivity {
         cursor = getContentResolver().query(
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                 null, MediaStore.Images.Media._ID + " = ? ", new String[]{document_id}, null);
+        assert cursor != null;
         cursor.moveToFirst();
         String path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
         cursor.close();
@@ -150,6 +149,7 @@ public class SendActivity extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
             return;
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            Toast.makeText(getApplicationContext(),":|",Toast.LENGTH_SHORT).show();
             //If the user has denied the permission previously your code will come to this block
         }
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
