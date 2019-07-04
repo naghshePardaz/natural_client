@@ -6,4 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".SendActivity">
 
+    <Button
+        android:id="@+id/buttonChoose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="112dp"
+        android:text="Select"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        tools:layout_editor_absoluteX="16dp" />
+
+
+    <Button
+        android:id="@+id/buttonUpload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="200dp"
+        android:layout_marginBottom="112dp"
+        android:text="Upload"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/buttonChoose" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="379dp"
+        android:layout_height="373dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

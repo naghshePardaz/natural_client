@@ -69,6 +69,6 @@ public class ProfileActivity extends AppCompatActivity implements ProjectAdaptor
 
     @Override
     public void onItemClick(View view, int position) {
-        Toast.makeText(getApplicationContext(), adapter.getItem(position) + "salammmmm", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), adapter.getProjectData(position).getDataID() , Toast.LENGTH_LONG).show();
     }
 }

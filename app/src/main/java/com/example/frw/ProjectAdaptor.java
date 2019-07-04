@@ -12,26 +12,35 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.frw.request.ProjectResponse;
 import com.example.frw.request.ProjectsList;
+import com.example.frw.request.SendData;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ProjectAdaptor extends RecyclerView.Adapter<ProjectAdaptor.ViewHolder> {
 
     private List<String> pName;
     private List<String> pId;
     private ItemClickListener mClickListener;
+    private Map<Integer, SendData> pData;
 
     // data is passed into the constructor
     public ProjectAdaptor(ProjectResponse data) {
         List<String> projectName = new ArrayList<>();
         List<String> projectId = new ArrayList<>();
-        for (ProjectsList pList : data.getProjecList()) {
+        Map<Integer, SendData> projectData = new HashMap<>();
+
+        for (ProjectsList pList : data.getProjectList()) {
             projectName.add(pList.getProjectName());
             projectId.add(pList.getProjectID());
+            projectData.put(data.getProjectList().indexOf(pList), pList.getData());
         }
+
         this.pName = projectName;
         this.pId = projectId;
+        this.pData = projectData;
     }
 
     // inflates the row layout from xml when needed
@@ -68,7 +77,6 @@ public class ProjectAdaptor extends RecyclerView.Adapter<ProjectAdaptor.ViewHold
         return pName.size();
     }
 
-
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView mTextView;
         Button mButton;
@@ -82,12 +90,13 @@ public class ProjectAdaptor extends RecyclerView.Adapter<ProjectAdaptor.ViewHold
 
         @Override
         public void onClick(View view) {
-            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
+            if (mClickListener != null)
+                mClickListener.onItemClick(view, getAdapterPosition());
         }
     }
 
-    String getItem(int id) {
-        return pName.get(id);
+    public SendData getProjectData(int id) {
+        return pData.get(id);
     }
 
     //allows click events to be caught
