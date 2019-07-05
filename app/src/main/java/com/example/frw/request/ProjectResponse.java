@@ -17,6 +17,7 @@ public class ProjectResponse {
     public String getUserID() {
         return userID;
     }
+
     public void setUserID(String userID) {
         this.userID = userID;
     }
@@ -24,6 +25,7 @@ public class ProjectResponse {
     public String getUserName() {
         return userName;
     }
+
     public void setUserName(String userName) {
         this.userName = userName;
     }
@@ -31,6 +33,7 @@ public class ProjectResponse {
     public List<ProjectsList> getProjectList() {
         return projectList;
     }
+
     public void setProjectList(List<ProjectsList> projectList) {
         this.projectList = projectList;
     }

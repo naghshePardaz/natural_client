@@ -21,6 +21,7 @@ public class SendData implements Serializable {
     public String getDataID() {
         return dataID;
     }
+
     public void setDataID(String dataID) {
         this.dataID = dataID;
     }
@@ -28,6 +29,7 @@ public class SendData implements Serializable {
     public String getDataURL() {
         return dataURL;
     }
+
     public void setDataURL(String dataURL) {
         this.dataURL = dataURL;
     }
@@ -35,6 +37,7 @@ public class SendData implements Serializable {
     public String getDataFeed() {
         return dataFeed;
     }
+
     public void setDataFeed(String dataFeed) {
         this.dataFeed = dataFeed;
     }
@@ -42,6 +45,7 @@ public class SendData implements Serializable {
     public Date getDataDate() {
         return dataDate;
     }
+
     public void setDataDate(Date dataDate) {
         this.dataDate = dataDate;
     }

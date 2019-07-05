@@ -2,7 +2,6 @@ package com.example.frw;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,6 +79,20 @@ public class ProjectAdaptor extends RecyclerView.Adapter<ProjectAdaptor.ViewHold
         return pName.size();
     }
 
+    ArrayList<SendData> getProjectData(int id) {
+        return pData.get(id);
+    }
+
+    //allows click events to be caught
+    void setClickListener(ItemClickListener itemClickListener) {
+        this.mClickListener = itemClickListener;
+    }
+
+    //parent activity will implement this method to respond to click events
+    public interface ItemClickListener {
+        void onItemClick(View view, int position);
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView mTextView;
         Button mButton;
@@ -97,20 +110,5 @@ public class ProjectAdaptor extends RecyclerView.Adapter<ProjectAdaptor.ViewHold
                 mClickListener.onItemClick(view, getAdapterPosition());
             }
         }
-    }
-
-
-    ArrayList<SendData> getProjectData(int id) {
-        return pData.get(id);
-    }
-
-    //allows click events to be caught
-    void setClickListener(ItemClickListener itemClickListener) {
-        this.mClickListener = itemClickListener;
-    }
-
-    //parent activity will implement this method to respond to click events
-    public interface ItemClickListener {
-        void onItemClick(View view, int position);
     }
 }

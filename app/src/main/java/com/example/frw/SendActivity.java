@@ -1,10 +1,5 @@
 package com.example.frw;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -17,6 +12,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.frw.request.ProjectResponse;
 import com.example.frw.request.RetrofitClient;
@@ -40,27 +40,6 @@ public class SendActivity extends AppCompatActivity {
     private ImageView imageView;
     private String projectId;
     private Uri filePath;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_send);
-
-        Intent intent = getIntent();
-        projectId = intent.getStringExtra("projectId");
-
-        requestStoragePermission();
-
-        Button buttonChoose = findViewById(R.id.buttonChoose);
-        Button buttonUpload = findViewById(R.id.buttonUpload);
-        imageView = findViewById(R.id.imageView);
-
-        buttonChoose.setOnClickListener(chooseImageClickListener);
-        buttonUpload.setOnClickListener(uploadImageClickListener);
-
-
-    }
-
     private View.OnClickListener chooseImageClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -70,24 +49,6 @@ public class SendActivity extends AppCompatActivity {
             startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
         }
     };
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            filePath = data.getData();
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-                imageView.setImageBitmap(bitmap);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
     private View.OnClickListener uploadImageClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -127,6 +88,42 @@ public class SendActivity extends AppCompatActivity {
         }
     };
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_send);
+
+        Intent intent = getIntent();
+        projectId = intent.getStringExtra("projectId");
+
+        requestStoragePermission();
+
+        Button buttonChoose = findViewById(R.id.buttonChoose);
+        Button buttonUpload = findViewById(R.id.buttonUpload);
+        imageView = findViewById(R.id.imageView);
+
+        buttonChoose.setOnClickListener(chooseImageClickListener);
+        buttonUpload.setOnClickListener(uploadImageClickListener);
+
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            filePath = data.getData();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                imageView.setImageBitmap(bitmap);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     private String getPath(Uri filePath) {
         Cursor cursor = getContentResolver().query(filePath, null, null, null, null);
         assert cursor != null;
@@ -150,7 +147,7 @@ public class SendActivity extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
             return;
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
-            Toast.makeText(getApplicationContext(),":|",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), ":|", Toast.LENGTH_SHORT).show();
             //If the user has denied the permission previously your code will come to this block
         }
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
