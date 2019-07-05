@@ -6,17 +6,16 @@
     android:paddingTop="10dp"
     android:paddingBottom="10dp">
 
-    <Button
-        android:id="@+id/btnSendImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:textSize="10sp" />
+    <ImageView
+        android:id="@+id/imgData"
+        android:layout_width="130dp"
+        android:layout_height="130dp" />
+
 
     <TextView
-        android:id="@+id/tvProjectName"
+        android:id="@+id/tvDataDate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1" />
+
 </LinearLayout>

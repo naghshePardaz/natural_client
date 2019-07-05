@@ -1,7 +1,5 @@
 package com.example.frw;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -10,6 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.frw.request.RetrofitClient;
 import com.example.frw.request.SharedPref;
@@ -31,6 +32,35 @@ public class MainActivity extends AppCompatActivity {
     private String usernameInput;
     private String passwordInput;
     private String token;
+    private TextWatcher loginTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int i, int i1, int i2) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int i, int i1, int i2) {
+            usernameInput = editTextUsername.getText().toString().trim();
+            passwordInput = editTextPassword.getText().toString().trim();
+
+            buttonConfirm.setEnabled(usernameInput.length() >= 5 &&
+                    passwordInput.matches("^[A-Za-z0-9!@#$%&*?]{8,}$"));
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+        }
+    };
+    private View.OnClickListener loginOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            // Make Collection using JSONObject
+            final JsonObject jsonParam = new JsonObject();
+            jsonParam.addProperty("username", usernameInput);
+            jsonParam.addProperty("password", passwordInput);
+
+            loginPostRequest(jsonParam);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,37 +84,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private TextWatcher loginTextWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int i, int i1, int i2) {
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int i, int i1, int i2) {
-            usernameInput = editTextUsername.getText().toString().trim();
-            passwordInput = editTextPassword.getText().toString().trim();
-
-            buttonConfirm.setEnabled(usernameInput.length() >= 5 &&
-                    passwordInput.matches("^[A-Za-z0-9!@#$%&*?]{8,}$"));
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-        }
-    };
-
-    private View.OnClickListener loginOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            // Make Collection using JSONObject
-            final JsonObject jsonParam = new JsonObject();
-            jsonParam.addProperty("username", usernameInput);
-            jsonParam.addProperty("password", passwordInput);
-
-            loginPostRequest(jsonParam);
-        }
-    };
-
     private void loginPostRequest(JsonObject jsonParam) {
         RetrofitClient.createApi().auth(jsonParam)
                 .subscribeOn(Schedulers.io())
@@ -100,9 +99,7 @@ public class MainActivity extends AppCompatActivity {
                             token = responseBody.string();
                             SharedPref.createSharedPref(
                                     getApplicationContext(), "token", token);
-
                             goProfileActivity();
-
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -122,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
     private void goProfileActivity() {
         Intent mIntent = new Intent(this, ProfileActivity.class);
         mIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
-                         Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(mIntent);
     }
 }

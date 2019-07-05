@@ -2,9 +2,10 @@ package com.example.frw.request;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class SendData {
+public class SendData implements Serializable {
     @SerializedName("_id")
     private String dataID;
 

@@ -1,5 +1,6 @@
 package com.example.frw;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.util.Log;
@@ -58,20 +59,14 @@ public class ProfileActivity extends AppCompatActivity implements ProjectAdaptor
                         adapter.setClickListener(profileActivity);
                         rvProjects.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
-                        Log.e("", "onNext: "+pr.getProjectList() );
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(profileActivity, e.getMessage(), Toast.LENGTH_LONG).show();
-                        System.out.println(e.getMessage());
-
-
                     }
 
                     @Override
                     public void onComplete() {
-                        Log.e("", "onkkkkkkkkkkkkkkkkkNext: " );
 
                     }
                 });
@@ -79,6 +74,9 @@ public class ProfileActivity extends AppCompatActivity implements ProjectAdaptor
 
     @Override
     public void onItemClick(View view, int position) {
-        Toast.makeText(getApplicationContext(), adapter.getProjectData(position).get(1).getDataID() , Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, ShowDataActivity.class);
+        intent.putExtra("data", adapter.getProjectData(position));
+        startActivity(intent);
+        Toast.makeText(getApplicationContext(), adapter.getProjectData(position).get(1).getDataID(), Toast.LENGTH_LONG).show();
     }
 }
