@@ -11,8 +11,7 @@ public class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.SampleHold
     @NonNull
     @Override
     public SampleHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        SampleHolder o = null;
-        return o;
+        return null;
     }
 
     @Override
