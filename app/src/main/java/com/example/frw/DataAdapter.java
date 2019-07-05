@@ -2,8 +2,6 @@ package com.example.frw;
 
 
 import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +50,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
         final String date = dDate.get(position);
         final String url = "https://natural.liara.run/api/file/image/" + dImageUrl.get(position);
         holder.mTextView.setText(date);
-        Picasso.get().load(url).into(holder.imageView);
+        Picasso.get().load(url).resize(130, 130).centerCrop().into(holder.imageView);
 
     }
 
