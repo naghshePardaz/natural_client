@@ -16,14 +16,14 @@ import com.example.frw.request.ProjectsList;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProjectAdaptor extends RecyclerView.Adapter<ProjectAdaptor.ViewHolder> {
+public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHolder> {
 
     private List<String> pName;
     private List<String> pId;
     private ItemClickListener mClickListener;
 
     // data is passed into the constructor
-    public ProjectAdaptor(ProjectResponse data) {
+    public ProjectAdapter(ProjectResponse data) {
         List<String> projectName = new ArrayList<>();
         List<String> projectId = new ArrayList<>();
         for (ProjectsList pList : data.getProjecList()) {
@@ -90,12 +90,12 @@ public class ProjectAdaptor extends RecyclerView.Adapter<ProjectAdaptor.ViewHold
         return pName.get(id);
     }
 
-    //allows click events to be caught
+    // allows click events to be caught
     void setClickListener(ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
 
-    //parent activity will implement this method to respond to click events
+    // parent activity will implement this method to respond to click events
     public interface ItemClickListener {
         void onItemClick(View view, int position);
     }

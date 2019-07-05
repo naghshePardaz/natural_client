@@ -19,9 +19,9 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 
-public class ProfileActivity extends AppCompatActivity implements ProjectAdaptor.ItemClickListener {
+public class ProfileActivity extends AppCompatActivity implements ProjectAdapter.ItemClickListener {
     private RecyclerView rvProjects;
-    ProjectAdaptor adapter;
+    ProjectAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class ProfileActivity extends AppCompatActivity implements ProjectAdaptor
     }
 
 
-    private void getProjectList(String token, final ProjectAdaptor.ItemClickListener t) {
+    private void getProjectList(String token, final ProjectAdapter.ItemClickListener t) {
         RetrofitClient.createApi().proj(token)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -52,7 +52,7 @@ public class ProfileActivity extends AppCompatActivity implements ProjectAdaptor
 
                     @Override
                     public void onNext(ProjectResponse pr) {
-                        adapter = new ProjectAdaptor(pr);
+                        adapter = new ProjectAdapter(pr);
                         adapter.setClickListener(t);
                         rvProjects.setAdapter(adapter);
                     }
