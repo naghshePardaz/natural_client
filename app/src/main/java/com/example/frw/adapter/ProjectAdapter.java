@@ -1,4 +1,4 @@
-package com.example.frw;
+package com.example.frw.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,35 +8,48 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.frw.R;
+import com.example.frw.SendActivity;
 import com.example.frw.request.ProjectResponse;
 import com.example.frw.request.ProjectsList;
+import com.example.frw.request.SendData;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHolder> {
 
     private List<String> pName;
     private List<String> pId;
     private ItemClickListener mClickListener;
+    private Map<Integer, ArrayList<SendData>> pData;
 
     // data is passed into the constructor
     public ProjectAdapter(ProjectResponse data) {
         List<String> projectName = new ArrayList<>();
         List<String> projectId = new ArrayList<>();
-        for (ProjectsList pList : data.getProjecList()) {
+        Map<Integer, ArrayList<SendData>> projectData = new HashMap<>();
+
+        for (ProjectsList pList : data.getProjectList()) {
             projectName.add(pList.getProjectName());
             projectId.add(pList.getProjectID());
+            projectData.put(data.getProjectList().indexOf(pList), pList.getData());
         }
+
         this.pName = projectName;
         this.pId = projectId;
+        this.pData = projectData;
     }
 
     // inflates the row layout from xml when needed
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
@@ -48,7 +61,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
 
     // binds the data to the TextView in each row
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         final String str = pName.get(position);
         final String id = pId.get(position);
         holder.mTextView.setText(str);
@@ -68,12 +81,11 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
         return pName.size();
     }
 
-
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView mTextView;
         Button mButton;
 
-        public ViewHolder(View itemView) {
+        private ViewHolder(View itemView) {
             super(itemView);
             mTextView = itemView.findViewById(R.id.tvProjectName);
             mButton = itemView.findViewById(R.id.btnSendImage);
@@ -82,16 +94,18 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
 
         @Override
         public void onClick(View view) {
-            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
+            if (mClickListener != null) {
+                mClickListener.onItemClick(view, getAdapterPosition());
+            }
         }
     }
 
-    String getItem(int id) {
-        return pName.get(id);
+    public ArrayList<SendData> getProjectData(int id) {
+        return pData.get(id);
     }
 
     // allows click events to be caught
-    void setClickListener(ItemClickListener itemClickListener) {
+    public void setClickListener(ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
 
@@ -99,4 +113,5 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
     public interface ItemClickListener {
         void onItemClick(View view, int position);
     }
+
 }

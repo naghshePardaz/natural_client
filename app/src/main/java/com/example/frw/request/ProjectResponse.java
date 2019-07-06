@@ -12,11 +12,12 @@ public class ProjectResponse {
     private String userName;
 
     @SerializedName("projects")
-    private List<ProjectsList> projecList;
+    private List<ProjectsList> projectList;
 
     public String getUserID() {
         return userID;
     }
+
     public void setUserID(String userID) {
         this.userID = userID;
     }
@@ -24,14 +25,16 @@ public class ProjectResponse {
     public String getUserName() {
         return userName;
     }
+
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
-    public List<ProjectsList> getProjecList() {
-        return projecList;
+    public List<ProjectsList> getProjectList() {
+        return projectList;
     }
-    public void setProjecList(List<ProjectsList> projecList) {
-        this.projecList = projecList;
+
+    public void setProjectList(List<ProjectsList> projectList) {
+        this.projectList = projectList;
     }
 }

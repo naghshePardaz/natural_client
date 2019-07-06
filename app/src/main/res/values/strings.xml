@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">FRW</string>
-    <string name="title_activity_profile">ProfileActivity</string>
+    <string name="act_two">لیست پروژه‌ها</string>
+    <string name="act_three">ارسال تصویر</string>
+    <string name="act_four">محتوای پروژه</string>
+
+    <string name="username">نام کاربری</string>
+    <string name="password">رمز عبور</string>
+    <string name="login">ورود</string>
+
+    <string name="select">انتخاب</string>
+    <string name="upload">ارسال</string>
+    <string name="image">ارسال تصویر</string>
 </resources>

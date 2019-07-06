@@ -1,9 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".SendActivity">
+    android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tbProfile"
+        style="@style/toolBar">
+
+        <TextView
+
+            style="@style/toolBarText"
+            android:text="@string/act_three" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <Button
+        style="@style/greenButton"
+        android:id="@+id/buttonChoose"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="100dp"
+        android:text="@string/select" />
+
+    <Button
+        style="@style/greenButton"
+        android:id="@+id/buttonUpload"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="100dp"
+        android:text="@string/upload" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp" />
+
+</RelativeLayout>

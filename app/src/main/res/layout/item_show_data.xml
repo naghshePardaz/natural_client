@@ -6,17 +6,17 @@
     android:paddingTop="10dp"
     android:paddingBottom="10dp"
     android:paddingLeft="10dp"
-    android:paddingRight="10dp">
+    android:paddingRight="10dp"
+    android:background="@color/colorAccent">
 
-    <Button
-        style="@style/greenButton"
-        android:id="@+id/btnSendImage"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        android:text="@string/image" />
+    <ImageView
+        android:id="@+id/imgData"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
 
     <TextView
         style="@style/recyclerText"
-        android:id="@+id/tvProjectName"
-        android:textColor="@color/colorPrimaryDark"/>
+        android:id="@+id/tvDataDate"
+        android:textColor="@color/colorText"/>
+
 </LinearLayout>

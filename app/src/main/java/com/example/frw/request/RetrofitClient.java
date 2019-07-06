@@ -15,7 +15,7 @@ public class RetrofitClient {
                 .setLenient()
                 .create();
 
-        if (retrofit==null) {
+        if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl("https://natural.liara.run/")
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

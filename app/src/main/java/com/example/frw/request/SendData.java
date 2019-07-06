@@ -2,9 +2,10 @@ package com.example.frw.request;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class SendData {
+public class SendData implements Serializable {
     @SerializedName("_id")
     private String dataID;
 
@@ -20,6 +21,7 @@ public class SendData {
     public String getDataID() {
         return dataID;
     }
+
     public void setDataID(String dataID) {
         this.dataID = dataID;
     }
@@ -27,6 +29,7 @@ public class SendData {
     public String getDataURL() {
         return dataURL;
     }
+
     public void setDataURL(String dataURL) {
         this.dataURL = dataURL;
     }
@@ -34,6 +37,7 @@ public class SendData {
     public String getDataFeed() {
         return dataFeed;
     }
+
     public void setDataFeed(String dataFeed) {
         this.dataFeed = dataFeed;
     }
@@ -41,6 +45,7 @@ public class SendData {
     public Date getDataDate() {
         return dataDate;
     }
+
     public void setDataDate(Date dataDate) {
         this.dataDate = dataDate;
     }

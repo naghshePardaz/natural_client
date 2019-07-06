@@ -6,15 +6,15 @@
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tbProfile"
+        android:id="@+id/tbShow"
         style="@style/toolBar">
 
         <TextView
             style="@style/toolBarText"
-            android:text="@string/act_two" />
+            android:text="@string/act_four" />
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvProjects"
+        android:id="@+id/rvProjectData"
         style="@style/recycler" />
 </RelativeLayout>
