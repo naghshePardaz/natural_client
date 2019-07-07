@@ -1,6 +1,7 @@
 package com.example.frw;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -60,6 +61,9 @@ public class SendActivity extends AppCompatActivity {
             RequestBody mFile = RequestBody.create(MediaType.parse("image/*"), file);
             MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("file", file.getName(), mFile);
 
+            final ProgressDialog progressDialog = ProgressDialog.show(SendActivity.this,
+                    "Image is uploading", "Please wait", false, false);
+
             RetrofitClient.createApi().upload(mToken, fileToUpload, projectId)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -71,6 +75,7 @@ public class SendActivity extends AppCompatActivity {
 
                         @Override
                         public void onNext(ProjectResponse projectResponse) {
+                            progressDialog.dismiss();
                             Toast.makeText(getApplicationContext(), "successFully upload To server", Toast.LENGTH_LONG).show();
                             SendActivity.super.onBackPressed();
                         }

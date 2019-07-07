@@ -1,5 +1,4 @@
 <resources>
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
@@ -27,6 +26,7 @@
         <item name="android:background">?attr/colorPrimary</item>
         <item name="android:elevation">3dp</item>
         <item name="android:layoutDirection">rtl</item>
+        <item name="android:textColorSecondary">@color/colorText</item>
     </style>
     <style name="toolBarText">
         <item name="android:layout_width">wrap_content</item>
@@ -43,7 +43,7 @@
         <item name="android:layout_marginTop">?attr/actionBarSize</item>
     </style>
     <style name="recyclerText">
-        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
         <item name="android:fontFamily">@font/vazir_fd</item>
