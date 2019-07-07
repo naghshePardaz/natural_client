@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbProfile"
@@ -13,24 +12,31 @@
             android:text="@string/act_three" />
     </androidx.appcompat.widget.Toolbar>
 
-    <Button
-        style="@style/greenButton"
-        android:id="@+id/buttonChoose"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="100dp"
-        android:text="@string/select" />
-
-    <Button
-        style="@style/greenButton"
-        android:id="@+id/buttonUpload"
-        android:layout_marginStart="150dp"
-        android:layout_marginTop="100dp"
-        android:text="@string/upload" />
-
-    <ImageView
-        android:id="@+id/imageView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="200dp" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="100dp"
+        android:padding="5dp">
 
+        <Button
+            android:id="@+id/buttonChoose"
+            style="@style/greenButton"
+            android:layout_width="match_parent"
+            android:text="@string/select" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_margin="5dp"
+            android:layerType="software"/>
+
+        <Button
+            android:id="@+id/buttonUpload"
+            style="@style/greenButton"
+            android:layout_width="match_parent"
+            android:text="@string/upload" />
+
+    </LinearLayout>
 </RelativeLayout>

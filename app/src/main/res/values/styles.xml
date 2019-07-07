@@ -16,7 +16,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textAlignment">center</item>
-        <item name="android:textColor">@color/colorText</item>
+        <item name="android:textColor">@color/colorWhite</item>
         <item name="android:textSize">16sp</item>
     </style>
 
@@ -26,13 +26,13 @@
         <item name="android:background">?attr/colorPrimary</item>
         <item name="android:elevation">3dp</item>
         <item name="android:layoutDirection">rtl</item>
-        <item name="android:textColorSecondary">@color/colorText</item>
+        <item name="android:textColorSecondary">@color/colorWhite</item>
     </style>
     <style name="toolBarText">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:fontFamily">@font/vazir_fd</item>
-        <item name="android:textColor">@color/colorText</item>
+        <item name="android:textColor">@color/colorWhite</item>
         <item name="android:textSize">22sp</item>
     </style>
 
@@ -45,16 +45,22 @@
     <style name="recyclerText">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1</item>
         <item name="android:fontFamily">@font/vazir_fd</item>
         <item name="android:textSize">16sp</item>
     </style>
+    <style name="recyclerTextGrid">
+        <item name="android:fontFamily">@font/vazir_fd</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:textColor">@color/colorGridGray</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
     <style name="greenButton">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@color/colorAccent</item>
         <item name="android:fontFamily">@font/vazir_fd</item>
-        <item name="android:textColor">@color/colorText</item>
+        <item name="android:textColor">@color/colorWhite</item>
     </style>
 
 </resources>

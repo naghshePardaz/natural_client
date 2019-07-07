@@ -3,30 +3,45 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="4dp"
-    android:background="@color/colorAccent"
-    android:elevation="2dp"
-    android:padding="10dp">
+    android:layout_margin="5dp"
+    android:background="@color/colorWhite"
+    android:elevation="1dp">
 
     <ImageView
         android:id="@+id/imgData"
-        android:layout_width="100dp"
-        android:layout_height="100dp" />
+        android:layout_width="90dp"
+        android:layout_height="90dp" />
 
-    <LinearLayout
+    <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
         android:orientation="vertical"
-        android:layout_weight="1">
+        android:padding="5dp"
+        android:rowCount="2">
+
         <TextView
             android:id="@+id/tvDate"
-            style="@style/recyclerText"
-            android:textColor="@color/colorText"
-            android:textAlignment="center"/>
+            style="@style/recyclerTextGrid"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="2dp"/>
+
         <TextView
             android:id="@+id/tvTime"
-            style="@style/recyclerText"
-            android:textColor="@color/colorText" />
-    </LinearLayout>
+            style="@style/recyclerTextGrid"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="2dp"/>
 
+        <TextView
+            android:id="@+id/tvDateN"
+            style="@style/recyclerTextGrid"
+            android:text="@string/date" />
+
+        <TextView
+            android:id="@+id/tvTimeN"
+            style="@style/recyclerTextGrid"
+            android:text="@string/time" />
+    </GridLayout>
 </LinearLayout>

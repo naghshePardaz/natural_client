@@ -62,7 +62,7 @@ public class SendActivity extends AppCompatActivity {
             MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("file", file.getName(), mFile);
 
             final ProgressDialog progressDialog = ProgressDialog.show(SendActivity.this,
-                    "Image is uploading", "Please wait", false, false);
+                    "در حال ارسال ...", "لطفا منتظر بمانید", false, false);
 
             RetrofitClient.createApi().upload(mToken, fileToUpload, projectId)
                     .subscribeOn(Schedulers.io())

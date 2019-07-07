@@ -16,5 +16,6 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvProjectData"
-        style="@style/recycler" />
+        style="@style/recycler"
+        android:background="#EEEFEA"/>
 </RelativeLayout>
