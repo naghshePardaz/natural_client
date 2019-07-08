@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
@@ -25,14 +24,16 @@
             style="@style/recyclerTextGrid"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_margin="2dp"/>
+            android:layout_marginRight="8dp"
+            android:layout_gravity="right"/>
 
         <TextView
             android:id="@+id/tvTime"
             style="@style/recyclerTextGrid"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_margin="2dp"/>
+            android:layout_marginRight="8dp"
+            android:layout_gravity="right"/>
 
         <TextView
             android:id="@+id/tvDateN"

@@ -1,56 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/linear_login_form"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center_vertical"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:visibility="invisible"
-    tools:context=".MainActivity"
-    tools:ignore="ExtraText,InvalidId">
+    android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.AppCompatEditText
-        style="@style/loginElement"
-        android:id="@+id/edit_text_username"
-        android:inputType="text"
-        android:hint="@string/username"
-        android:textColorHint="@color/colorWhite"
-        android:backgroundTint="@color/colorWhite"
-        android:drawableRight="@drawable/ic_user_solid"/>
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/frw">
+    </ImageView>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    <androidx.appcompat.widget.AppCompatEditText
-        style="@style/loginElement"
-        android:id="@+id/edit_text_password"
-        android:inputType="textPassword"
-        android:hint="@string/password"
-        android:textColorHint="@color/colorWhite"
-        android:backgroundTint="@color/colorWhite"
-        android:drawableRight="@drawable/ic_lock_solid"/>
-    <androidx.appcompat.widget.AppCompatCheckBox
-        android:id="@+id/cbShowPass"
-        android:layout_width="wrap_content"
-        android:layout_height="16dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginStart="10dp"
-        android:button="@drawable/check_box_background"
-        android:visibility="invisible"
-        android:checked="true"/>
-    </RelativeLayout>
-
-    <Button
-        style="@style/loginElement"
-        android:id="@+id/button_confirm"
-        android:enabled="false"
-        android:text="@string/login"
-        android:layout_marginTop="20dp"
-        android:background="@color/colorPrimaryDark"/>
-
-</LinearLayout>
+</RelativeLayout>
 
